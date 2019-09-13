@@ -1,0 +1,16 @@
+@(ip: String, hostname: String)
+
+@main("Welcome") {
+@defining(play.core.PlayVersion.current) { version =>
+
+<section id="content">
+  <div class="wrapper doc">
+    <article>
+      <h2>Host IP: @ip</h2>
+      <h2>Hostname : @hostname</h2>
+      <h2>Timestamp : @System.currentTimeMillis</h2>
+    </article>
+  </div>
+</section>
+}
+}
