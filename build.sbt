@@ -1,14 +1,18 @@
-name := """play-java-hello-world-web"""
-organization := "com.example"
+name := """playframework-hello-world"""
+organization := "id.prasetiyo"
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.12.8"
 
 libraryDependencies += guice
-libraryDependencies += "com.datadoghq" % "java-dogstatsd-client" % "2.7"
+
+// Starts: Prevent documentation of API for production bundles
+sources in (Compile, doc) := Seq.empty
+publishArtifact in (Compile, packageDoc) := false
+// Ends.
 
 mainClass in assembly := Some("play.core.server.ProdServerStart")
 fullClasspath in assembly += Attributed.blank(PlayKeys.playPackageAssets.value)
