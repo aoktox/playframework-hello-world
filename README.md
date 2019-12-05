@@ -34,7 +34,7 @@ To build and run the project:
 
 
 ## Endpoints
-see [routes file](./routes)
+see [routes file](conf/routes)
 - `/`
 - `/whoami`
 - `/ip`
