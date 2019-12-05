@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "registry_username": "",
+    "service_name": "playframework-hello-world",
+    "service_version": ""
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "openjdk:8-jre",
+      "commit": true,
+      "run_command": [
+        "-d",
+        "-t",
+        "-i",
+        "{{.Image}}",
+        "/bin/sh"
+      ],
+      "changes": [
+        "WORKDIR /opt",
+        "LABEL APP_VERSION={{user `service_version`}}",
+        "ENTRYPOINT [\"/opt/bin/{{user `service_name`}}\"]",
+        "CMD [\"-h\"]"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "target/universal/stage/",
+      "destination": "/opt"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "chmod +x /opt/bin/{{user `service_name`}}"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `registry_username`}}/{{user `service_name`}}",
+        "tag": "{{user `service_version`}}"
+      }
+    ],
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `registry_username`}}/{{user `service_name`}}",
+        "tag": "latest"
+      }
+    ]
+  ]
+}
