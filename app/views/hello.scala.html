@@ -1,15 +1,23 @@
-@(ip: String, hostname: String)
+@(systemInformation: SystemInformation)
 
 @main("Welcome") {
 @defining(play.core.PlayVersion.current) { version =>
 
 <section id="content">
-  <div class="wrapper doc">
+  <div class="wrapper doc" style="padding: 0 !important;">
     <article>
-      <h2>IP address: @ip</h2>
-      <h2>Hostname : @hostname</h2>
-      <h2>Timestamp : @System.currentTimeMillis</h2>
+      <h2><span style="color: #6dae38">IP address :</span> @systemInformation.getIp_address</h2>
+      <h2><span style="color: #6dae38">Hostname : </span> @systemInformation.getHosname</h2>
+      <h2><span style="color: #6dae38">CPU core : </span> @systemInformation.getCpu_core</h2>
+      <h2><span style="color: #6dae38">Physical memory size : </span> @SystemInformation.formatSize(systemInformation.getRamSize)</h2>
+      <h2><span style="color: #6dae38">HEAP size : </span> @SystemInformation.formatSize(systemInformation.getHeapSize)</h2>
+      <h2><span style="color: #6dae38">HEAP max size : </span> @SystemInformation.formatSize(systemInformation.getHeapMaxSize)</h2>
+      <h2><span style="color: #6dae38">HEAP free Size : </span> @SystemInformation.formatSize(systemInformation.getHeapFreeSize)</h2>
+      <h2><span style="color: #6dae38">Timestamp : </span> @System.currentTimeMillis</h2>
     </article>
+  </div>
+  <div class="wrapper doc">
+    <h3 align="right">Play version : @version</h3>
   </div>
 </section>
 }
