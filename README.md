@@ -35,8 +35,11 @@ To build and run the project:
 
 ## Endpoints
 see [routes file](conf/routes)
-- `/`
-- `/whoami`
-- `/ip`
-- `/hostname`
-- `/host`
+<pre>
+- `/`           : get system information
+- `/whoami`     : get system information (json formatted)
+- `/ip`         : get ip address
+- `/hostname`   : get hostname
+- `/host`       : get hostname and ip
+- `do_oom`      : to simulate memory leak
+</pre>
