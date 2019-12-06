@@ -1,8 +1,6 @@
 {
   "variables": {
-    "registry_username": "",
-    "service_name": "playframework-hello-world",
-    "service_version": ""
+    "service_name": "playframework-hello-world"
   },
   "builders": [
     {
@@ -14,11 +12,10 @@
         "-t",
         "-i",
         "{{.Image}}",
-        "/bin/sh"
+        "/bin/bash"
       ],
       "changes": [
         "WORKDIR /opt",
-        "LABEL APP_VERSION={{user `service_version`}}",
         "ENTRYPOINT [\"/opt/bin/{{user `service_name`}}\"]",
         "CMD [\"-h\"]"
       ]
@@ -41,15 +38,8 @@
     [
       {
         "type": "docker-tag",
-        "repository": "{{user `registry_username`}}/{{user `service_name`}}",
-        "tag": "{{user `service_version`}}"
-      }
-    ],
-    [
-      {
-        "type": "docker-tag",
-        "repository": "{{user `registry_username`}}/{{user `service_name`}}",
-        "tag": "latest"
+        "repository": "{{user `service_name`}}",
+        "tag": "java8"
       }
     ]
   ]
